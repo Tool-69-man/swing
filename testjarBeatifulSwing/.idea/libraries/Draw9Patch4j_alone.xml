@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Draw9Patch4j_alone">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Swing9patchget/lib/Draw9Patch4j_alone.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

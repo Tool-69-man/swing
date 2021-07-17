@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="daylen">
+    <output-path>$PROJECT_DIR$/out/artifacts/daylen</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="day01servlet" />
+          <element id="module-output" name="dayStudy" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

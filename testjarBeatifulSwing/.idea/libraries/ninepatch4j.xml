@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ninepatch4j">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/Swing9patchget/lib/ninepatch4j.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

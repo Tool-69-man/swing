@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="swing-worker-1.2(1.6-)">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/swingjarput/lib/swing-worker-1.2(1.6-).jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

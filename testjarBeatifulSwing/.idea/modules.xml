@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Swing9patchget/Swing9patchget.iml" filepath="$PROJECT_DIR$/Swing9patchget/Swing9patchget.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Swing9patchget/Swing9patchgetadada.iml" filepath="$PROJECT_DIR$/Swing9patchget/Swing9patchgetadada.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Swing9patchget/dayforlen.iml" filepath="$PROJECT_DIR$/Swing9patchget/dayforlen.iml" />
+    </modules>
+  </component>
+</project>
