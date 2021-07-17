@@ -206,7 +206,7 @@ public class RecordQuery {
 
         if("订单".equals(recordType)){
             List<Order> orders = OrderDao.getOrders(field,value);
-            tbData = new Object[orders.size()][Constant.orderLables.length];
+            tbData = new Object[orders.size()][Constant.movieLables.length];
             for(Order order: orders){
                 tbData[i][0] = order.getId();
                 tbData[i][1] = order.getName();

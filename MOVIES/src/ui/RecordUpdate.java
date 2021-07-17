@@ -224,8 +224,8 @@ recordPane = new JPanel();
                 show.setHall(Integer.parseInt(textFields.get(1).getText()));
             }
             String time = datePicker.getJFormattedTextField().getText();
-            String hour = String.valueOf(hourBox.getSelectedItem());//改变 toString
-            String minute= String.valueOf(minBox.getSelectedItem());//
+            String hour = hourBox.getSelectedItem().toString();//改变 toString
+            String minute= minBox.getSelectedItem().toString();//
             time+=" "+hour+":"+minute;
             show.setTime(time);
             if (!CheckHandler.isNumeric(textFields.get(2).getText())){
@@ -264,6 +264,7 @@ recordPane = new JPanel();
 
 
     private void btnQueryActionPerformed(ActionEvent e){
+        System.out.println("进入查询");
         int itemId = -1;
         boolean  queryFail = false;
         try {
@@ -290,9 +291,8 @@ recordPane = new JPanel();
                 textFields.get(4).setText(movie.getSource() );
                 textFields.get(5).setText(movie.getPublisher());
                 datePicker.getJFormattedTextField().setText(movie.getReleaseDate());
-            }
-        } else {
-            queryFail = true;
+            } else { queryFail = true;}
+
         }//显示电影
 
 
@@ -306,13 +306,17 @@ recordPane = new JPanel();
                 String[] timeMeta = show.getTime().trim().split(" ");
                 movieBox.setSelectedItem(Moviedao.getMovie(show.getMid()).getName());
                 datePicker.getJFormattedTextField().setText(timeMeta[0]);
-                String[] timeMeta2 = timeMeta[1].trim().split(":");
+                int indextime=1;
+                if (timeMeta[indextime].length()==0){
+                    indextime+=2;
+                }
+                String[] timeMeta2 = timeMeta[indextime].trim().split(":");
                 hourBox.setSelectedItem(timeMeta2[0]);
                 minBox.setSelectedItem(timeMeta2[1]);
-            } else {
-                queryFail = true;
-            }
-        }
+            } else { queryFail = true; }
+        }//场次
+
+
 //        if ("订单".equals(recordType)) {
 //            Order order = OrderDao.getOrder(itemId);
 //            if (order != null) {
@@ -351,7 +355,7 @@ recordPane = new JPanel();
             return;
         }//失败就警告
 
-
+        System.out.println("退出查询");
     }//查询btn
 
 

@@ -84,7 +84,7 @@ public class RecordDelete {
         }
         if ("场次".equals(recordType)) {
             currLabels = Constant.showLables;
-            recordPane.setLayout(new GridLayout(6, 2, 6, 6));
+            recordPane.setLayout(new GridLayout(5, 2, 6, 6));
             contentPane.setBorder(new EmptyBorder(100, 150, 150, 250));
         }
 
@@ -95,7 +95,7 @@ public class RecordDelete {
         }
 
         if ("用户".equals(recordType)) {
-            currLabels = Constant.showLables;
+            currLabels = Constant.staffLables;
             recordPane.setLayout(new GridLayout(4, 2, 6, 6));
             contentPane.setBorder(new EmptyBorder(100, 150, 200, 300));
         }
@@ -107,12 +107,9 @@ public class RecordDelete {
             entryLabel.setText(currLabels[i] + ":");
             entryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             JTextField entryField = new JTextField();
-
-
-//            if (i==0){
             entryField.setEnabled(false);
             entryField.setBackground(new Color(230, 230, 230));
-//            }//i==0
+
             recordPane.add(entryLabel);
             if (!(recordType.equals("订单") && currLabels[i].equals("订单数据"))) {
                 recordPane.add(entryField);
@@ -223,7 +220,7 @@ public class RecordDelete {
             return;
         }
 
-        itemId = Integer.parseInt(idField.getText());
+//        itemId = Integer.parseInt(idField.getText());
         if ("电影".equals(recordType)) {
             Movie movie = Moviedao.getMovie(itemId);
             if (movie != null) {
@@ -234,9 +231,10 @@ public class RecordDelete {
                 textFields.get(4).setText(movie.getSource() + "");
                 textFields.get(5).setText(movie.getPublisher() + "");
                 textFields.get(6).setText(movie.getReleaseDate()+"");
-            }
-        } else {
-            queryFail = true;
+            } else {
+                System.out.println("删除电影，对象为空报错");
+                queryFail = true;
+            }//if else
         }//显示电影
 
 
@@ -252,6 +250,7 @@ public class RecordDelete {
                 textFields.get(4).setHorizontalAlignment(SwingConstants.LEFT);
 
             } else {
+                System.out.println("删除场次，对象为空报错");
                 queryFail = true;
             }
         }
@@ -259,12 +258,13 @@ public class RecordDelete {
             Order order = OrderDao.getOrder(itemId);
             if (order != null) {
                 textFields.get(0).setText(order.getId() + "");
-                textFields.get(1).setText(order.getName()+"");
+                textFields.get(1).setText(order.getName());
                 textFields.get(2).setText(order.getPhone());
                 textFields.get(3).setText(order.getData());
 
 
             } else {
+                System.out.println("删除订单，对象为空报错");
                 queryFail = true;
             }//判断
 
@@ -282,6 +282,7 @@ public class RecordDelete {
                    textFields.get(3).setText(Constant.userRoleDescs[index]);
                 }
             } else {
+                System.out.println("删除用户，对象为空报错");
                 queryFail = true;
             }//判断
 

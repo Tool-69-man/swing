@@ -92,7 +92,7 @@ public class OrderDao {
         boolean success = true;
         try{
             SQLExec sqlExec = new SQLExec();
-            String query =QueryCreate.queryForDelete("order","id",orderId);
+            String query =QueryCreate.queryForDelete("orders","id",orderId);
             sqlExec.update(query);
             success = true;
         }catch (Exception ex){

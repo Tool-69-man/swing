@@ -17,7 +17,7 @@ public class ShowDao {
             SQLExec sqlExec = new SQLExec();
             String query = "";
             if (field.trim().length()==0){
-                query=QueryCreate.queryForResults("shows");
+                query=QueryCreate.queryForResults("shows ");
             }else if (field.trim().equals("id")|| field.trim().equals("mid")||field.trim().equals("hall")){//多个整型查询
                 query=QueryCreate.queryForResults("shows",field,Integer.parseInt(value));
             }else if(field.trim().equals("price")){//小数查询
@@ -27,7 +27,7 @@ public class ShowDao {
             }
             ResultSet res=sqlExec.select(query);
             Show show =null;
-            if (res.next()){
+            while (res.next()){
                 show=new Show();
                 SQLMapper.mapResToShows(res,show);
                 shows.add(show);

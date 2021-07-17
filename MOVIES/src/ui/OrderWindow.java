@@ -326,7 +326,7 @@ public class OrderWindow extends JFrame {
         }//是否选取场次
 
         usedSeats = " "+usedSeats.trim()+" ";
-        if (checkSeat.length()>0&&usedSeats.indexOf(" "+checkSeat+" ")>=0){
+        if (checkSeat.length()>0&& usedSeats.contains(" " + checkSeat + " ")){
             return false;//选择的座位未被占用
         }else if(checkSeat.length()>0) {
             usedSeats += checkSeat+" ";
@@ -336,7 +336,7 @@ public class OrderWindow extends JFrame {
         seatHtml +="<table><tr><th></th>";
 
         for(int j =0;j<Constant.HALL_COLUMN_NUM;j++){
-            seatHtml+="<th>"+(j+1)+"</th>";
+            seatHtml += "<th>"+(j+1)+"</th>";
         }
         seatHtml += "</tr>";
 
@@ -350,7 +350,7 @@ public class OrderWindow extends JFrame {
 
                 curSeat = " "+(i+1)+","+(j+1)+" ";
                 //位置是否预定
-                if(usedSeats.indexOf(curSeat)>=0){
+                if(usedSeats.contains(curSeat)){
                     seatHtml+="<td><font color = red>X</font></td>";
                 }else {
                     seatHtml+="<td>O<td>";

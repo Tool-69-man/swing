@@ -78,7 +78,7 @@ public class RecordAdd {
             entryLabel.setHorizontalAlignment(SwingConstants.RIGHT);
             recordPane.add(entryLabel);
 
-            if ("场次".equals(recordType) && "电影名称".equals(currLabels[i])) {
+            if ("场次".equals(recordType) && "电影名称".equals(currLabels[i].trim())) {
                 List<Movie> movies = Moviedao.getMovies("", "");
                 String[] movieNames = new String[movies.size()];
                 for (int m = 0; m < movies.size(); m++) {
@@ -109,9 +109,12 @@ public class RecordAdd {
                 combinedPane.add(sepLabel1);
                 combinedPane.add(minBox);
                 combinedPane.add(sepLabel2);
+
                 JLabel timeLabel = new JLabel("");
                 recordPane.add(timeLabel);
                 timeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
+
+
                 recordPane.add(combinedPane);
             } else if ("用户".equals(recordType) && "权限".equals(currLabels[i])) {
                 roleBox = new JComboBox<String>(Constant.userRoleDescs);
@@ -179,11 +182,11 @@ public class RecordAdd {
             Show show = new Show();
 
             show.setMid(moviesIds.get(movieBox.getSelectedIndex()));
-            if (!CheckHandler.isNumeric(textFields.get(0).getText())){
+            if (!CheckHandler.isInteger(textFields.get(0).getText())){
                 JOptionPane.showMessageDialog(this.contentPane,"输入放映厅号码必须为整数");
                 return;
             }else {
-                show.setHall(Integer.parseInt(textFields.get(1).getText()));
+                show.setHall(Integer.parseInt(textFields.get(0).getText()));
             }
             String time = datePicker.getJFormattedTextField().getText();
             String hour = hourBox.getSelectedItem().toString();

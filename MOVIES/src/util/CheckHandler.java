@@ -54,9 +54,9 @@ public class CheckHandler {
         System.out.println(orderData);
         if (orderData.length()>0){
             System.out.println();
-            String[] tickets = orderData.split(  "  ;  "  );
+            String[] tickets = orderData.split(  ";"  );
             for (String t:tickets){
-                String[] ticketMeta = t.split(  "  \\|  "  );
+                String[] ticketMeta = t.split(  "\\|"  );
                 usedSeats.add(ticketMeta[0]);
             }//
         }//订单
@@ -65,13 +65,13 @@ public class CheckHandler {
 
     //输入是否为数字
     public static boolean isNumeric(String str){
-        return str != null && str.matches(  "  [-+]?\\d*\\.?\\d+  "  );
+        return str != null && str.matches(  "[-+]?\\d*\\.?\\d+"  );
     }
 
     //输入是含有数字
     public static boolean containsDigit(String str){
         boolean flag= false;
-        Pattern pattern  = Pattern.compile(  "  .*\\d+.*  "  );
+        Pattern pattern  = Pattern.compile(  ".*\\d+.*"  );
         Matcher matcher = pattern.matcher(str);
         if (matcher.matches()){
             flag  = true;

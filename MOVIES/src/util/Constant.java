@@ -19,7 +19,7 @@ public class Constant {
     public static String[] movieLables={"电影编号","电影名称","电影类别","导演","来源国家","出版公司","上映时间"};
     public static String[] movieDBFields={"mid","name","type","director","source","publisher","release_Date"};
 
-    public static String[] showLables={"场次编号","电影编号","放映厅","放映时间","票价（￥）"};
+    public static String[] showLables={"场次编号","电影名称","放映厅","放映时间","票价（￥）"};
     public static String[] showDBFields={"id","mid","hall","time","price"};
 
     public static String[] orderLables={"订单编号","名字","电话","订单数据"};
