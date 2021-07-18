@@ -31,7 +31,7 @@ public class Welcome extends JFrame {
     private  void  initUI(){
         //标题
         setTitle("电影购票系统");
-        setSize(1800,1600);
+//        setSize(1800,1600);
         setVisible(true);
         //获取窗体对象 getContentPane();
         Container welcomePane= getContentPane();

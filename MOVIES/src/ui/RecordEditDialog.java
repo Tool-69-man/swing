@@ -4,6 +4,7 @@ import database.Moviedao;
 import database.OrderDao;
 import database.ShowDao;
 import database.StaffDao;
+import sun.misc.JavaAWTAccess;
 import take.Movie;
 import take.Order;
 import take.Show;
@@ -143,7 +144,7 @@ public class RecordEditDialog extends JDialog {
                     timeLabel.setHorizontalAlignment(SwingConstants.RIGHT);
                     recordPane.add(combinedPane);
                 } else if ("用户".equals(recordType) && "权限".equals(currLabels[i])) {
-                    roleBox = new JComboBox<>(Constant.userRoleDescs);
+                    roleBox = new JComboBox<String>(Constant.userRoleDescs);
                     recordPane.add(roleBox);
             } else if ("订单".equals(recordType) && "订单数据".equals(currLabels[i])) {
                 textFields.add(entryField);
@@ -154,9 +155,9 @@ public class RecordEditDialog extends JDialog {
         }//for循环
             if (recordType.equals("订单")){
                 JButton viewButton = new JButton("点击查看");
-                viewButton.addMouseListener(new MouseAdapter() {
+                viewButton.addMouseListener(new java.awt.event.MouseAdapter() {
                     @Override
-                    public void mouseClicked(MouseEvent e) {
+                    public void mouseClicked(java.awt.event.MouseEvent e) {
                         String orderData = textFields.get(3).getText();
                         if (orderData.length()>0){
                             new OrderShowDialog(orderData);
@@ -250,7 +251,7 @@ public class RecordEditDialog extends JDialog {
                 Show show = new Show();
                 show.setId(itemId);
                 show.setMid(moviesIds.get(movieBox.getSelectedIndex()));
-                if (!CheckHandler.isNumeric(textFields.get(1).getText())){
+                if (!CheckHandler.isInteger(textFields.get(1).getText())){
                     JOptionPane.showMessageDialog(this,"输入放映厅号码必须为整数");
                     return;
                 }else {
@@ -275,6 +276,7 @@ public class RecordEditDialog extends JDialog {
 
             if ("用户".equals(recordType)){
                 Staff user = new Staff();
+                user.setUid(itemId);
                 user.setUsername(textFields.get(1).getText());
                 user.setPassword(textFields.get(2).getText());
                 user.setRole(Constant.userRoleIds[roleBox.getSelectedIndex()]);
@@ -341,9 +343,7 @@ public class RecordEditDialog extends JDialog {
                     textFields.get(4).setText(movie.getSource() + "");
                     textFields.get(5).setText(movie.getPublisher() + "");
                     datePicker.getJFormattedTextField().setText(movie.getReleaseDate());
-                }
-            } else {
-                queryFail = true;
+                } else {queryFail = true;}
             }//显示电影
 
 
@@ -353,10 +353,14 @@ public class RecordEditDialog extends JDialog {
                     textFields.get(0).setText(show.getId() + "");
                     textFields.get(1).setText(show.getHall() + "");
                     textFields.get(2).setText(show.getPrice() + "");
-                    String[] timeMeta = show.getTime().split(" ");
+                    String[] timeMeta = show.getTime().trim().split(" ");
                     movieBox.setSelectedItem(Moviedao.getMovie(show.getMid()).getName());
                     datePicker.getJFormattedTextField().setText(timeMeta[0]);
-                    String[] timeMeta2 = timeMeta[1].split(":");
+                    int indextime=1;
+                    if (timeMeta[indextime].length()==0){
+                        indextime+=2;
+                    }
+                    String[] timeMeta2 = timeMeta[indextime].trim().split(":");
                     hourBox.setSelectedItem(timeMeta2[0]);
                     minBox.setSelectedItem(timeMeta2[1]);
                 } else {

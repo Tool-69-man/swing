@@ -28,7 +28,8 @@ import java.util.List;
 public class OrderWindow extends JFrame {
     //属性
     private JTable showTable;
-    private JLabel seatMatrix;
+    private JLabel seatMatrix;//
+//    private JTextArea seatMatrix;
     private JLabel ticketTable;
     private Container contentPane;
     private JPanel mainPane;
@@ -92,6 +93,7 @@ public class OrderWindow extends JFrame {
         seatMatrix = new JLabel();
 
         seatMatrix.setPreferredSize(new Dimension(200,350));
+//        seatMatrix.setPreferredSize(new Dimension(400,500));
         seatMatrix.setVerticalAlignment(SwingConstants.TOP);
         paintSeatMatrix(0,"");
 
@@ -193,8 +195,9 @@ public class OrderWindow extends JFrame {
         contentPane.add(mainPane,BorderLayout.NORTH);
         contentPane.add(bottomPane,BorderLayout.SOUTH);
 
-        setSize(900,600);
+//        setSize(900,600);
         setResizable(false);
+        GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().setFullScreenWindow(this);
 
         setLocationRelativeTo(getOwner());
         setVisible(true);
@@ -280,23 +283,24 @@ public class OrderWindow extends JFrame {
     private void paintTicketTable(){
        String ticketHtml = "";
        double priceTotal = 0;//总价
-       ticketHtml += "<table width = 320 border =1><tr>";
+       ticketHtml += "<table width = 320 border =1>\n<tr>";
        for (String label : Constant.ticketLables){
-           ticketHtml+="<th>"+label+"</th>";
+           ticketHtml+="<th>"+label+"</th>\n";
        }//标签名称
+        ticketHtml += "</tr>\n";
         int i = 0;//序号
         for (Ticket ticket: ticketList){
-            ticketHtml+="<tr><td>"+(i+1)+"</td>";
-            ticketHtml+="<td>"+ticket.getMovie()+"</td>";
-            ticketHtml+="<td>"+ticket.getTime();
-            ticketHtml+="<td>"+ticket.getPrice()+"</td>";
+            ticketHtml+="<tr>\n<td>"+(i+1)+"</td>\n";
+            ticketHtml+="<td>"+ticket.getMovie()+"</td>\n";
+            ticketHtml+="<td>"+ticket.getTime()+"</td>\n";
+            ticketHtml+="<td>"+ticket.getPrice()+"</td>\n";
             ticketHtml+="<td>"+ticket.getSeatRow()+"行"+ticket.getSeatColumn()+"列</td></tr>";
             priceTotal += ticket.getPrice();
             i++;
         }
-        ticketHtml += "<tr><td colspan= 5>总计： "+priceTotal+"元</td></tr></table>";
-        String title = "<p>你的当前订单("+(i>0?("包含"+i+"张票"):"订单为空")+")</p>";
-        ticketHtml  = "<html>"+title+ticketHtml+"</html>";
+        ticketHtml += "<tr>\n<td colspan= 5>总计： "+priceTotal+"元</td>\n</tr>\n</table>\n";
+        String title = "\n<p>你的当前订单("+(i>0?("包含"+i+"张票"):"订单为空")+")</p>\n";
+        ticketHtml  = "<html>\n"+title+ticketHtml+"</html>\n";
         ticketTable.setText(ticketHtml);
     }
 
@@ -312,7 +316,7 @@ public class OrderWindow extends JFrame {
             ticketTmp.setTime(show.getTime());
             ticketTmp.setShow(show.getId());
             seatHtml += "<p>该场安排在<font color=red>"+show.getHall()
-                    +"</font>号放映厅，座位情况如下（X为已选，O为未选）：</p>";
+                    +"</font>号放映厅，座位情况如下（X为已选，O为未选）：</p>\n";
             for (Ticket t : ticketList){
                 if (t.getShow() == showId){
                     usedSeats += " "+t.getSeatRow()+","+t.getSeatColumn();
@@ -321,50 +325,50 @@ public class OrderWindow extends JFrame {
             }//座位的值
 
         }else{
-            seatHtml += "<p>请选择电影，座位情况如下（X为已选，O为未选）：</p>";
+            seatHtml += "\n<p>请选择电影，座位情况如下（X为已选，O为未选）：</p>\n";
 
         }//是否选取场次
 
         usedSeats = " "+usedSeats.trim()+" ";
-        if (checkSeat.length()>0&& usedSeats.contains(" " + checkSeat + " ")){
+        if (checkSeat.length()>0&& usedSeats.indexOf(" " + checkSeat + " ")>=0){
             return false;//选择的座位未被占用
         }else if(checkSeat.length()>0) {
             usedSeats += checkSeat+" ";
         }
 
         //打印所有列的标记
-        seatHtml +="<table><tr><th></th>";
+        seatHtml +="<table>\n<tr>\n<th></th>\n";
 
         for(int j =0;j<Constant.HALL_COLUMN_NUM;j++){
-            seatHtml += "<th>"+(j+1)+"</th>";
+            seatHtml += "<th>"+(j+1)+"</th>\n";
         }
-        seatHtml += "</tr>";
+        seatHtml += "</tr>\n";
 
         //循环打印座位图
         String curSeat;
         for (int i=0;i<Constant.HALL_ROW_NUM;i++){
             for (int j=0;j<Constant.HALL_COLUMN_NUM;j++){
                 if(j==0){
-                    seatHtml+="<tr><th>"+(i+1)+"</th>";
+                    seatHtml+="<tr>\n<th>"+(i+1)+"</th>\n";
                 }
 
                 curSeat = " "+(i+1)+","+(j+1)+" ";
                 //位置是否预定
-                if(usedSeats.contains(curSeat)){
-                    seatHtml+="<td><font color = red>X</font></td>";
+                if(usedSeats.indexOf(curSeat)>=0){
+                    seatHtml+="\n<td><font color = red>X</font></td>\n";
                 }else {
-                    seatHtml+="<td>O<td>";
+                    seatHtml+="\n<td>O</td>\n";
                 }//打印OX
                 if (j==Constant.HALL_COLUMN_NUM-1){
-                    seatHtml+="</tr>";
+                    seatHtml+="</tr>\n";
                 }//每行结尾结束
 
             }
         }//列的循环
 
-        seatHtml+="</table>";
-        seatHtml+="<html>"+seatHtml+"</html>";
-        seatMatrix.setText(seatHtml);
+        seatHtml+="</table>\n";
+        seatHtml ="<html>\n"+seatHtml+"\n</html>";
+        seatMatrix.setText(seatHtml.trim());
 
 
 
@@ -395,7 +399,7 @@ public class OrderWindow extends JFrame {
 
         //手机号码格式
         if(CheckHandler.isValidMobile(userPhone)){
-            JOptionPane.showMessageDialog(this,"手机号码格式错误:11位，1【34578】+");
+            JOptionPane.showMessageDialog(this,"手机号码格式错误:(^((13[0-9])|(14[5-8])|(15([0-3]|[5-9]))|(16[6])|(17[0|4|6|7|8])|(18[0-9])|(19[8-9]))\\d{8}$)|(^((170[0|5])|(174[0|1]))\\d{7}$)|(^(14[1|4])\\d{10}$)");
             return;
         }
 
@@ -403,6 +407,7 @@ public class OrderWindow extends JFrame {
         Order order = new Order();
         order.setName(userName);
         order.setPhone(userPhone);
+//        order.setDatatime();
         String data="";
         String seat="";
         //记录订单数据，数据用竖线隔开

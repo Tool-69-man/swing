@@ -270,7 +270,7 @@ public class AdminWindow extends JFrame {
                 accountMenu.add(exitAccount);
 
             }//账号
-
+            menuBar.add( accountMenu);
 
         }//主菜单
 

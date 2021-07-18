@@ -111,7 +111,7 @@ public class RecordQuery {
 
         recordTable.addMouseListener(new java.awt.event.MouseAdapter() {
             @Override
-            public void mouseClicked(java.awt.event.MouseEvent e) {
+            public void mousePressed(java.awt.event.MouseEvent e) {//mousePressed   mouseClicked
                 int row = recordTable.rowAtPoint(e.getPoint());
                 int col = recordTable.columnAtPoint(e.getPoint());
                 if (row>=0&&col>=0){
